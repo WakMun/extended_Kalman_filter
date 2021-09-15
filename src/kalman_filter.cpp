@@ -42,10 +42,12 @@ void KalmanFilter::Update(const VectorXd &z) {
   commonUpdate(y);
 }
 
+
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
   /**
    * update the state by using Extended Kalman Filter equations
    */
+  
   DEBUGOUT("Radar update.");
 
   double px = x_(0);
@@ -59,16 +61,19 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   VectorXd h = VectorXd(3);
   h << rho, theta, rho_dot;
   VectorXd y = z - h;
+
   while ( y(1) > M_PI || y(1) < -M_PI ) {
     if ( y(1) > M_PI ) {
-      y(1) -= M_PI;
+      y(1) -= (2*M_PI);
     } else {
-      y(1) += M_PI;
+      y(1) += (2*M_PI);
     }
   }
 
   commonUpdate(y);
 }
+
+
 
 
 void KalmanFilter::commonUpdate(const VectorXd& y){
