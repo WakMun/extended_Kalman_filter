@@ -73,8 +73,23 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     ekf_.x_ << 1, 1, 1, 1;
 
     if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
-      // TODO: Convert radar from polar to cartesian coordinates 
+      // Convert radar from polar to cartesian coordinates 
       //         and initialize state.
+      float rho = measurement_pack.raw_measurements_[0]; // range
+  	  float phi = measurement_pack.raw_measurements_[1]; // bearing
+  	  float rho_dot = measurement_pack.raw_measurements_[2]; // velocity
+  	  // Coordinates convertion from polar to cartesian
+  	  float x = rho * cos(phi);
+      if ( fabs(x) < 0.0001 ) {
+        x = 0.0001;
+      }
+  	  float y = rho * sin(phi);
+      if ( fabs(y) < 0.0001 ) {
+        y = 0.0001;
+      }
+  	  float vx = rho_dot * cos(phi);
+  	  float vy = rho_dot * sin(phi);
+      ekf_.x_ << x, y, vx , vy;
 
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
@@ -138,7 +153,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
    */
 
   /**
-   * TODO:
    * - Use the sensor type to perform the update step.
    * - Update the state and covariance matrices.
    */
