@@ -28,8 +28,11 @@ void KalmanFilter::Predict() {
    */
   DEBUGOUT("Getting new prediction.");
   x_ = F_ * x_;
+  DEBUGOUT("Getting new prediction. 1");
   MatrixXd Ft = F_.transpose();
+  DEBUGOUT("Getting new prediction. 2");
   P_ = F_ * P_ * Ft + Q_;
+  DEBUGOUT("Getting new prediction. done");
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
