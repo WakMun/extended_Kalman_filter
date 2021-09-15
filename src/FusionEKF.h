@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "Eigen/Dense"
+#include "debug.h"
 #include "kalman_filter.h"
 #include "measurement_package.h"
 #include "tools.h"
