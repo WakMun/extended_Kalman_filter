@@ -1,8 +1,11 @@
 #ifndef __debug_h__
 #define __debug_h__
 
+
+#include <iostream>
+
 #ifdef DEBUG
-#  define DEBUGOUT(x) do {std::cout << x << std::endl;} while(0);
+#  define DEBUGOUT(x) do {std::cerr << x << std::endl;} while(0);
 #else
 #  define DEBUGOUT(x) do {} while (0);
 #endif
