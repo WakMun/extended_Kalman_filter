@@ -36,6 +36,7 @@ void KalmanFilter::Update(const VectorXd &z) {
   /**
    * update the state by using Kalman Filter equations
    */
+  DEBUGOUT("Laser update.");
   VectorXd z_pred = H_ * x_;
   VectorXd y = z - z_pred;
   commonUpdate(y);
@@ -45,6 +46,8 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   /**
    * update the state by using Extended Kalman Filter equations
    */
+  DEBUGOUT("Radar update.");
+
   float px = x_(0);
   float py = x_(1);
   float vx = x_(2);

@@ -159,17 +159,17 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
     // TODO: Radar updates
-    DEBUGOUT("Updating on base of radar data.");
+    DEBUGOUT("FusionEKF: Radar Update.");
     ekf_.H_ = tools.CalculateJacobian(ekf_.x_);
     ekf_.R_ = R_radar_;
     ekf_.UpdateEKF(measurement_pack.raw_measurements_);
 
   } else {
     // TODO: Laser updates
-    DEBUGOUT("Updating on base of laser data.");
+    DEBUGOUT("FusionEKF: Laser Update.");
     ekf_.H_ = H_laser_;
   	ekf_.R_ = R_laser_;
-    //ekf_.Update(measurement_pack.raw_measurements_);
+    ekf_.Update(measurement_pack.raw_measurements_);
 
   }
 
