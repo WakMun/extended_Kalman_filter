@@ -39,6 +39,12 @@ FusionEKF::FusionEKF() {
   H_laser_ << 1, 0, 0, 0,
              0, 1, 0, 0;
 
+  ekf_.P_ = MatrixXd(4, 4);
+  ekf_.P_ << 1, 0, 0, 0,
+             0, 1, 0, 0,
+             0, 0, 1000, 0,
+             0, 0, 0, 1000;
+
   noise_ax = 9;
   noise_ay = 9;
 
@@ -124,6 +130,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
                             0, dt_3/2*noise_ay,                0,   dt_2*noise_ay;
 
 
+  
   ekf_.Predict();
 
   /**
