@@ -73,7 +73,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
       // TODO: Initialize state.
-      DEBUGOUT("Initialized with Laser!");
+      DEBUGOUT("Initialized with Laser reading.");
       ekf_.x_ << measurement_pack.raw_measurements_[0], 
                  measurement_pack.raw_measurements_[1], 
                  0, 
@@ -86,6 +86,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     is_initialized_ = true;
     return;
   }
+
+  DEBUGOUT("ProcessMeasurement called.");
 
   /**
    * Prediction
@@ -136,9 +138,11 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
     // TODO: Radar updates
+    DEBUGOUT("Updating on base of radar data.");
 
   } else {
     // TODO: Laser updates
+    DEBUGOUT("Updating on base of laser data.");
     ekf_.H_ = H_laser_;
   	ekf_.R_ = R_laser_;
     ekf_.Update(measurement_pack.raw_measurements_);
