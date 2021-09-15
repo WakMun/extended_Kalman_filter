@@ -1,3 +1,14 @@
+[image1]: ./outImages/res_dataset1.png "Sample run for dataset 1."
+[image2]: ./outImages/res_dataset2.png "Sample run for dataset 2."
+
+# Fusion Results
+
+Here are the results for the test runs on dataset 1 and 2.
+
+![alt text][image1]
+![alt text][image2]
+
+
 # Extended Kalman Filter Project Starter Code
 Self-Driving Car Engineer Nanodegree Program
 
