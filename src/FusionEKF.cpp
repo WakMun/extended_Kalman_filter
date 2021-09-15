@@ -77,7 +77,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       //         and initialize state.
       double rho = measurement_pack.raw_measurements_[0]; // range
   	  double phi = measurement_pack.raw_measurements_[1]; // bearing
-  	  double rho_dot = measurement_pack.raw_measurements_[2]; // velocity
   	  // Coordinates convertion from polar to cartesian
   	  double x = rho * cos(phi);
       if ( fabs(x) < 0.0001 ) {
